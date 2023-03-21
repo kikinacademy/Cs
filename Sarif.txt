@@ -1,0 +1,44 @@
+using System;
+
+//Preguntar articulos que lleve en su carrito
+//nombre del articulo y su precio
+//hasta que el cliente informe que ya mencionó los articulos
+//cuantos y el importe total
+
+namespace ConsoleApp38
+{
+    class Program
+    {
+
+        static void Main(string[] args)
+        {
+            double total = 0;
+            double precio = 0;
+            string articulo = "";
+            int contador = 0;
+            string ingresar = "si";
+
+            do
+            {
+                Console.WriteLine("Quieres ingresar un producto?: ");
+                ingresar = Console.ReadLine();
+                if (ingresar == "si")
+                {
+                    Console.WriteLine("Nombre del producto: ");
+                    articulo = Console.ReadLine();
+
+                    Console.WriteLine("Precio de "+ articulo + ": ");
+                    precio = double.Parse(Console.ReadLine());
+
+                    total = total + precio;
+                    //contador = contador + 1
+                    contador += 1;
+                }
+            } while (ingresar == "si");
+
+            Console.WriteLine("Fueron un total de "+ contador + "\n");
+            Console.WriteLine("El precio es "+ total);
+
+        }
+    }
+}
