@@ -1,0 +1,33 @@
+using System;
+
+namespace ADA
+{
+    class Program
+    {
+        static void Numero()
+        {
+            Console.Write("Ingrese un número: ");
+            int numero = int.Parse(Console.ReadLine());
+            int suma = 0;
+            int multiplos = 0;
+
+            for (int i = 1; i <= numero; i++)
+            {
+                if (i % 3 == 0)
+                {
+                    multiplos++;
+                    suma += i;
+                }
+            }
+
+            Console.WriteLine("Suma total: " + suma);
+            Console.WriteLine("Multiplos de 3: " + multiplos);
+        }
+
+        static void Main(string[] args)
+        {
+            // Infomar cuantos múltiplos de 3 existen entre 1 y el número proporcionado y cuanto suman
+            Numero();
+        }
+    }
+}
