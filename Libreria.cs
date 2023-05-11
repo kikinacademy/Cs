@@ -14,12 +14,12 @@ namespace ADA
          */
         struct Libro
         {
-            public string? Nombre = "";
-            public int Isbn10;
-            public int Isbn13; // NEVER USED
-            public float PrecioLista;
-            public float CostoLibro;
-            public int ExistenciaActual;
+            public string Nombre = string.Empty;
+            public int Isbn10 = 0;
+            public int Isbn13 = 0; // NEVER USED
+            public float PrecioLista = 0;
+            public float CostoLibro = 0;
+            public int ExistenciaActual = 0;
             public bool VentaExclusiva = false; // NEVER USED
 
             public Libro()
@@ -43,8 +43,8 @@ namespace ADA
             public char[] CalleNumero = new char[80]; // NEVER USED
             public char[] Colonia = new char[60]; // NEVER USED
             public char[] Municipio = new char[50]; // NEVER USED
-            public int Cp; // NEVER USED
-            public List<Libro> Inventario = new List<Libro>(); 
+            public int Cp = 0; // NEVER USED
+            public List<Libro> Inventario = new List<Libro>();
 
             public Libreria()
             {
@@ -52,7 +52,6 @@ namespace ADA
 
             public void CapturarInventario()
             {
-
                 Console.WriteLine("Captura de inventario");
                 Console.Write("Cantidad de libros a capturar: ");
                 int cantidad = int.Parse(Console.ReadLine() ?? string.Empty);
@@ -92,7 +91,7 @@ namespace ADA
                         Libro temporal = Inventario[i];
                         Console.WriteLine("Libro encontrado");
                         Console.Write("Ingresa la cantidad de ejemplares de este libro: ");
-                        int cantidad = int.Parse(Console.ReadLine()?? String.Empty);
+                        int cantidad = int.Parse(Console.ReadLine() ?? String.Empty);
                         temporal.ExistenciaActual = cantidad;
                         Inventario[i] = temporal;
                         break;
@@ -104,7 +103,7 @@ namespace ADA
             {
                 Console.WriteLine("Ajuste de precio");
                 Console.Write("Ingresa el ISBN-10 del libro: ");
-                int isbn10 = int.Parse(Console.ReadLine()?? String.Empty);
+                int isbn10 = int.Parse(Console.ReadLine() ?? String.Empty);
                 for (int i = 0; i < Inventario.Count; i++)
                 {
                     if (isbn10 == Inventario[i].Isbn10)
@@ -126,7 +125,8 @@ namespace ADA
                 Console.WriteLine("Nombre\tExistencia\tCosto\tPrecio");
                 foreach (var libro in Inventario)
                 {
-                    Console.WriteLine($"{libro.Nombre}\t{libro.ExistenciaActual}\t{libro.CostoLibro}\t{libro.PrecioLista}");
+                    Console.WriteLine(
+                        $"{libro.Nombre}\t{libro.ExistenciaActual}\t{libro.CostoLibro}\t{libro.PrecioLista}");
                 }
             }
 
@@ -154,7 +154,8 @@ namespace ADA
 
         static void Menu()
         {
-            bool libreriaExiste = true; bool capturados = false;
+            bool libreriaExiste = true;
+            bool capturados = false;
             Libreria libreria = new Libreria();
             int opcion;
             do
@@ -180,13 +181,15 @@ namespace ADA
                             Console.WriteLine("No existe una librería registrada.");
                             break;
                         }
-                        if(capturados)
+
+                        if (capturados)
                         {
                             Console.WriteLine("Ya se capturó el inventario.");
                             break;
                         }
+
                         libreria.CapturarInventario();
-                            capturados = true;
+                        capturados = true;
                         break;
                     }
                     case 2:
