@@ -24,6 +24,13 @@ namespace ADA
 
             public Libro()
             {
+                Nombre = string.Empty;
+                Isbn10 = 0;
+                Isbn13 = 0;
+                PrecioLista = 0;
+                CostoLibro = 0;
+                ExistenciaActual = 0;
+                VentaExclusiva = false;
             }
         }
 
@@ -48,6 +55,13 @@ namespace ADA
 
             public Libreria()
             {
+                RazonSocial = new char[100];
+                Rfc = new char[13];
+                CalleNumero = new char[80];
+                Colonia = new char[60];
+                Municipio = new char[50];
+                Cp = 0;
+                Inventario = new List<Libro>();
             }
 
             public void CapturarInventario()
