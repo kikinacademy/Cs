@@ -22,7 +22,7 @@ namespace ADA
             public int ExistenciaActual = 0;
             public bool VentaExclusiva = false; // NEVER USED
 
-            public Libro()
+            public Libro() // EACH TIME YOU CREATE A BOOK, IT GETS DEFAULT VALUES
             {
                 Nombre = string.Empty;
                 Isbn10 = 0;
@@ -53,7 +53,7 @@ namespace ADA
             public int Cp = 0; // NEVER USED
             public List<Libro> Inventario = new List<Libro>();
 
-            public Libreria()
+            public Libreria() // DEFAULT CONSTRUCTOR, WHEN WE CREATE A NEW LIBRARY
             {
                 RazonSocial = new char[100];
                 Rfc = new char[13];
@@ -67,13 +67,14 @@ namespace ADA
             public void CapturarInventario()
             {
                 Console.WriteLine("Captura de inventario");
-                Console.Write("Cantidad de libros a capturar: ");
+                Console.Write("Cantidad de libros a capturar: "); // HOW MANY TIMES DOES THE CYCLE WILL REPEAT?
                 int cantidad = int.Parse(Console.ReadLine() ?? string.Empty);
-                for (int i = 0; i < cantidad; i++)
+                for (int i = 0; i < cantidad; i++) // FOR EACH BOOK, CREATE EMPTY BOOK (DEFAULT CONSTRUCTOR)
                 {
                     Libro temporal = new Libro();
-                    Console.Write("Nombre: ");
-                    temporal.Nombre = Console.ReadLine();
+
+                    Console.Write("Nombre: "); // START FILLING LIBRARY INSTANCE
+                    temporal.Nombre = Console.ReadLine(); // ASIGN OBTAINED VALUE TO FIELD
                     Console.Write("ISBN-10: ");
                     temporal.Isbn10 = int.Parse(Console.ReadLine() ?? string.Empty);
                     Console.Write("ISBN-13: ");
@@ -89,7 +90,7 @@ namespace ADA
                     if (bol == 1) temporal.VentaExclusiva = true;
                     else temporal.VentaExclusiva = false;
 
-                    Inventario.Add(temporal);
+                    Inventario.Add(temporal); // ADD OBJECT (BOOK) INSTANCE TO LIST
                 }
             }
 
@@ -97,17 +98,17 @@ namespace ADA
             {
                 Console.WriteLine("Ajuste de inventario");
                 Console.Write("Ingresa el ISBN-10 del libro: ");
-                int isbn10 = int.Parse(Console.ReadLine() ?? String.Empty);
-                for (int i = 0; i < Inventario.Count; i++)
+                int isbn10 = int.Parse(Console.ReadLine() ?? String.Empty); // ASKS FOR BOOK ISBN10
+                for (int i = 0; i < Inventario.Count; i++) // SEARCH IN THE COMPLETE LIST - LINEAR SEARCH (BARRIDO)
                 {
-                    if (isbn10 == Inventario[i].Isbn10)
+                    if (isbn10 == Inventario[i].Isbn10) // IF ISBN10 FROM BOOK (CURRENT) MATCHES SEARCHED ISBN10 (COMPROBACIÓN)
                     {
-                        Libro temporal = Inventario[i];
+                        Libro temporal = Inventario[i]; // SAVE BOOK IN TEMP TO MAKE CHANGES
                         Console.WriteLine("Libro encontrado");
-                        Console.Write("Ingresa la cantidad de ejemplares de este libro: ");
+                        Console.Write("Ingresa la cantidad de ejemplares de este libro: ");  // ADJUST QUANTITY
                         int cantidad = int.Parse(Console.ReadLine() ?? String.Empty);
                         temporal.ExistenciaActual = cantidad;
-                        Inventario[i] = temporal;
+                        Inventario[i] = temporal; // REPLACE OLD BOOK WITH NEW ONE
                         break;
                     }
                 }
@@ -117,17 +118,17 @@ namespace ADA
             {
                 Console.WriteLine("Ajuste de precio");
                 Console.Write("Ingresa el ISBN-10 del libro: ");
-                int isbn10 = int.Parse(Console.ReadLine() ?? String.Empty);
-                for (int i = 0; i < Inventario.Count; i++)
+                int isbn10 = int.Parse(Console.ReadLine() ?? String.Empty); // ASKS FOR BOOK ISBN10
+                for (int i = 0; i < Inventario.Count; i++) // SEARCH IN THE COMPLETE LIST - LINEAR SEARCH (BARRIDO)
                 {
-                    if (isbn10 == Inventario[i].Isbn10)
+                    if (isbn10 == Inventario[i].Isbn10) // IF ISBN10 FROM BOOK (CURRENT) MATCHES SEARCHED ISBN10 (COMPROBACIÓN)
                     {
-                        Libro temporal = Inventario[i];
+                        Libro temporal = Inventario[i]; // SAVE BOOK IN TEMP TO MAKE CHANGES
                         Console.WriteLine("Libro encontrado");
-                        Console.Write("Ingresa el nuevo precio de este libro: ");
+                        Console.Write("Ingresa el nuevo precio de este libro: ");  // ADJUST PRICE
                         int precio = int.Parse(Console.ReadLine() ?? string.Empty);
                         temporal.PrecioLista = precio;
-                        Inventario[i] = temporal;
+                        Inventario[i] = temporal; // REPLACE OLD BOOK WITH NEW ONE
                         break;
                     }
                 }
@@ -136,11 +137,11 @@ namespace ADA
             public void ReporteInventario()
             {
                 Console.WriteLine("Reporte de lista de libros");
-                Console.WriteLine("Nombre\tExistencia\tCosto\tPrecio");
-                foreach (var libro in Inventario)
+                Console.WriteLine("Nombre\tExistencia\tCosto\tPrecio"); //\t GIVES HORIZONTAL WHITESPACE (TAB)
+                foreach (var libro in Inventario) // LOOP IN ALL BOOKS (BARRIDO POR ELEMENTO)
                 {
                     Console.WriteLine(
-                        $"{libro.Nombre}\t{libro.ExistenciaActual}\t{libro.CostoLibro}\t{libro.PrecioLista}");
+                        $"{libro.Nombre}\t{libro.ExistenciaActual}\t{libro.CostoLibro}\t{libro.PrecioLista}"); // SHOW DETAILS NEEDED FOR EACH BOOK
                 }
             }
 
@@ -148,18 +149,18 @@ namespace ADA
             {
                 Console.WriteLine("Venta de mostrador");
                 Console.Write("Ingresa el ISBN-10 del libro: ");
-                int isbn10 = int.Parse(Console.ReadLine() ?? string.Empty);
-                for (int i = 0; i < Inventario.Count; i++)
+                int isbn10 = int.Parse(Console.ReadLine() ?? string.Empty); // ASKS FOR BOOK ISBN10
+                for (int i = 0; i < Inventario.Count; i++) // SEARCH IN THE COMPLETE LIST - LINEAR SEARCH (BARRIDO)
                 {
-                    if (isbn10 == Inventario[i].Isbn10)
+                    if (isbn10 == Inventario[i].Isbn10) // IF ISBN10 FROM BOOK (CURRENT) MATCHES SEARCHED ISBN10 (COMPROBACIÓN)
                     {
-                        Libro temporal = Inventario[i];
+                        Libro temporal = Inventario[i]; // SAVE BOOK IN TEMP TO MAKE CHANGES
                         Console.WriteLine("Libro encontrado");
-                        temporal.ExistenciaActual--;
-                        Inventario[i] = temporal;
+                        temporal.ExistenciaActual--; // TAKE 1 FROM INVENTORY
+                        Inventario[i] = temporal; // REPLACE OLD BOOK WITH NEW ONE
 
                         Console.WriteLine("Venta realizada");
-                        Console.WriteLine($"Total pagado por el libro {temporal.Nombre} es de {temporal.PrecioLista}");
+                        Console.WriteLine($"Total pagado por el libro {temporal.Nombre} es de {temporal.PrecioLista}"); // SHOW BOOK ORDER DETAILS
                         break;
                     }
                 }
@@ -168,9 +169,9 @@ namespace ADA
 
         static void Menu()
         {
-            bool libreriaExiste = true;
-            bool capturados = false;
-            Libreria libreria = new Libreria();
+            bool libreriaExiste = true; // CHECK IF THERE IS A LIBRARY CREATED
+            bool capturados = false; // CHECK IF THERE ARE BOOKS IN STOCK
+            Libreria libreria = new Libreria(); // LIBRARY STUCTURE CONTAINS A LIST OF BOOKS (ESTRUCTURA ANIDADA POR UNA LISTA)
             int opcion;
             do
             {
@@ -184,26 +185,26 @@ namespace ADA
                 Console.WriteLine("7) Salir del programa");
 
                 Console.Write("Opcion: ");
-                opcion = int.Parse(Console.ReadLine() ?? string.Empty);
+                opcion = int.Parse(Console.ReadLine() ?? string.Empty); // CHOOSE OPTION
 
-                switch (opcion)
+                switch (opcion) // ACCORDING TO THE OPTION SELECTED
                 {
                     case 1:
                     {
-                        if (!libreriaExiste)
-                        {
+                        if (!libreriaExiste)  // CHECKS FOR LIBRARY (IF libreriaExiste == FALSE) / LO MISMO QUE (IF libreriaExiste DIFERENTE DE VERDADERO)
+                            {
                             Console.WriteLine("No existe una librería registrada.");
                             break;
                         }
 
-                        if (capturados)
+                        if (capturados) // IF YOU ALREADY ADD BOOKS TO STOCK, SHOW MESSAGE AND EXIT
                         {
                             Console.WriteLine("Ya se capturó el inventario.");
                             break;
                         }
 
                         libreria.CapturarInventario();
-                        capturados = true;
+                        capturados = true; // CHANGE FLAG VARIABLE FOR STOCK
                         break;
                     }
                     case 2:
@@ -247,8 +248,8 @@ namespace ADA
                             break;
                         }
 
-                        libreria = CapturarDatosLibreria();
-                        libreriaExiste = true;
+                        libreria = CapturarDatosLibreria(); // RETURNS A LIBRARY WHICH WILL BE USED IN THE PROGRAM, NEED TO BE THE FIRST EXECUTED
+                        libreriaExiste = true; // CHANGE FLAG VARIABLE WHICH ALLOWS ALL OTHER OPTIONS TO BE USED
                         break;
                     }
                     case 6:
@@ -259,29 +260,29 @@ namespace ADA
                             break;
                         }
 
-                        libreria.VentaMostrador();
+                        libreria.VentaMostrador(); // BUY 1 BOOK OF THE CHOSEN ONE
                         break;
                     }
                     case 7:
                     {
-                        Console.WriteLine("Saliendo del programa...");
+                        Console.WriteLine("Saliendo del programa..."); // EXITING PROGRAM
                         break;
                     }
                     default:
                     {
-                        Console.WriteLine("Opción inválida, intente de nuevo.");
+                        Console.WriteLine("Opción inválida, intente de nuevo."); // DEFAULT CASE IF NOT A VALID OPTION
                         break;
                     }
                 }
-            } while (opcion != 7);
+            } while (opcion != 7); // LOOP GOES ON WHILE YOU DO NOT EXIT (CHOOSE 7)
         }
 
-        private static Libreria CapturarDatosLibreria()
+        private static Libreria CapturarDatosLibreria() // FUNCTION THAT RETURNS A LIBRARY INSTANCE
         {
             Console.WriteLine("Capturar datos de librería");
-            Libreria libreria = new Libreria();
+            Libreria libreria = new Libreria(); // CREATES EMPY LIBRARY
 
-            Console.Write("Razón social: ");
+            Console.Write("Razón social: "); // FILLS DATA
             libreria.RazonSocial = Console.ReadLine()!.ToCharArray();
             Console.Write("RFC: ");
             libreria.Rfc = Console.ReadLine()!.ToCharArray();
@@ -294,12 +295,22 @@ namespace ADA
             Console.Write("CP: ");
             libreria.Cp = int.Parse(Console.ReadLine() ?? string.Empty);
 
-            return libreria;
+            return libreria; // SEND FILLED OUT LIBRARY TO INVOCATION
         }
 
         static void Main()
         {
-            Menu();
+            Menu(); // CLEAN MAIN ONLY CALLING MENU METHOD
         }
     }
 }
+
+/*En C#, un constructor es un metodo especial que se utiliza para inicializar objetos de una clase. Se define dentro de la clase y tiene el mismo nombre que la clase. Cuando se crea una instancia de la clase mediante la palabra clave new, el constructor se invoca automáticamente y se utiliza para realizar cualquier inicialización necesaria antes de que el objeto esté listo para ser utilizado.
+
+Un constructor puede aceptar parámetros, lo que permite proporcionar valores iniciales para las propiedades o campos de la clase. También puede haber varios constructores definidos en una clase, cada uno con una lista de parámetros diferente. Esto se conoce como sobrecarga de constructores.
+
+EN ESTE CASO, EN LUGAR DE CLASE ES UNA ESTRUCTURA
+
+CLASE / ESTRUCTURA ES LA PLANTILLA (ABSTRACTO)
+OBJETO / INSTANCIA ES YA UN REGISTRO DE ESA PLANTILLA
+ */
